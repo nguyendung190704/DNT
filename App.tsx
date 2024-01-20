@@ -10,7 +10,7 @@ import ManLienHe from './src/ManLienHe';
 const App = () => {
   return (
     <View>
-      <ManLienHe />
+      <ManHinhChinh />
     </View>
   )
 }

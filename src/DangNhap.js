@@ -1,46 +1,55 @@
-import { Button, Image, StyleSheet, Text, TextInput, View, TouchableOpacity , ImageBackground} from 'react-native'
-import React, {useState} from 'react'
-import CheckBox from '@react-native-community/checkbox';
+import { Button, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ImageBackground } from 'react-native'
+import React, { useState } from 'react'
 
 
 const DangNhap = () => {
     const [isChecked, setChecked] = useState(false);
+    const [password, setPassword] = useState('');
+    const [isPasswordHidden, setPasswordHidden] = useState(true);
+
+    const togglePasswordVisibility = () => {
+        setPasswordHidden(!isPasswordHidden);
+    };
     return (
         <ImageBackground
-                source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }}
-            >
-        <View style={styles.backgroud}>
-            <View style={styles.logo}>
-                <Image
-                    style={styles.img}
-                    source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/FPT_Polytechnic.png/1200px-FPT_Polytechnic.png' }} />
-                <Text style={styles.cm}>Chào mừng bạn trở lại</Text>
+            source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }}
+        >
+            <View style={styles.backgroud}>
+                <View style={styles.logo}>
+                    <Image
+                        style={styles.img}
+                        source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/FPT_Polytechnic.png/1200px-FPT_Polytechnic.png' }} />
+                    <Text style={styles.cm}>Chào mừng bạn trở lại</Text>
+                </View>
+                <Text style={styles.pw}>Username</Text>
+                <TextInput style={styles.textInput} />
+                <Text style={styles.pw} >Password</Text>
+                <View style={styles.passwordContainer}>
+                    <TextInput
+                        style={styles.passwordInput}
+                        secureTextEntry={isPasswordHidden}
+                        onChangeText={(text) => setPassword(text)}
+                    />
+                    <TouchableOpacity
+                        style={styles.eyeIcon}
+                        onPress={togglePasswordVisibility}
+                    >
+                        <Text>{isPasswordHidden ? 'Hiện ' : 'Ẩn'}</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                        style={styles.buttondn}
+                        onPress={() => console.log('Đăng nhập thành công')}>
+                        <Text style={styles.buttonText}>Đăng nhập</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.buttondk}
+                        onPress={() => console.log('Đăng Ký thành công')}>
+                        <Text style={styles.buttonText}>Đăng Ký</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-            <Text style={styles.pw}>Username</Text>
-            <TextInput style={styles.textInput} />
-            <Text style={styles.pw} >Password</Text>
-            <TextInput style={styles.textInput } secureTextEntry={true}/>
-            <View style={styles.checkboxContainer}>
-                <CheckBox
-                    value={isChecked}
-                    onValueChange={(newValue) => setChecked(newValue)}
-                    style={styles.checkbox}
-                />
-                <Text style={styles.checkboxLabel}>Remember me</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                    style={styles.buttondn}
-                    onPress={() => console.log('Đăng nhập thành công')}>
-                    <Text style={styles.buttonText}>Đăng nhập</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={styles.buttondk}
-                    onPress={() => console.log('Đăng Ký thành công')}>
-                    <Text style={styles.buttonText}>Đăng Ký</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
         </ImageBackground>
     )
 }
@@ -92,12 +101,29 @@ const styles = StyleSheet.create({
         marginLeft: 8,
     },
     buttonContainer: {
-        flexDirection:'row',
+        flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         marginTop: 10,
         marginLeft: 20,
-        marginRight:20,
+        marginRight: 20,
+    },
+    passwordContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: 320,
+        marginLeft: 20,
+        borderColor: '#eee',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 48,
+    },
+    passwordInput: {
+        flex: 1,
+        padding: 10,
+    },
+    eyeIcon: {
+        padding: 10,
     },
     buttondn: {
         width: 130,

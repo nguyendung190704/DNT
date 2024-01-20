@@ -19,43 +19,48 @@ const ManYeuThich = () => {
         return price.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
     };
     return (
-            <ImageBackground
-                source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }}
-            >
-                <View style={styles.container}>
-                    <Image
-                        style={{ width: 360, height: 120 }}
-                        source={{ uri: 'https://capherangxay.vn/wp-content/uploads/2019/01/nhung-luu-y-de-mo-quan-cafe-nguyen-chat-2.jpg' }} />
-                    <ImageBackground
-                        style={{ width: 360, height: 40, borderTopRightRadius: 20, opacity:0.5, alignItems: 'center', justifyContent: 'center' }}
-                        source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }} >
-                        <Text style={styles.title}>Sản phẩm yêu thích</Text>
-                    </ImageBackground>
-                    <FlatList
-                        style={{height:417}}
-                        data={danhSach}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => (
-                            <View style={styles.productItem}>
-                                <Image
-                                    style={styles.img}
-                                    source={{ uri: item.linkAnh }} />
-                                <View style={styles.ngang}>
-                                    <View style={{ width: 295, marginLeft: 5 }} >
-                                        <View style={styles.ngang}>
-                                            <Text style={{ color: 'white', fontFamily: 'cursive', fontSize: 20 ,width:215}}>{item.tenSP}</Text>
-                                            <View style={{ flexDirection: 'row' }}>
-                                                <Text style={{ color: 'white', fontSize: 15, fontFamily: 'cursive', marginTop: 7 }}>
-                                                    {formatPrice(item.giaSP)}
-                                                </Text>
-                                            </View>
+        <ImageBackground
+            source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }}
+        >
+            <View style={styles.container}>
+                <ImageBackground
+                    style={{ width: 360, height: 40, borderTopRightRadius: 20, opacity: 0.5, alignItems: 'center', justifyContent: 'center' }}
+                    source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }} >
+                    <Text style={styles.title}>Sản phẩm yêu thích</Text>
+                </ImageBackground>
+                <FlatList
+                    style={{ height: 535 }}
+                    data={danhSach}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <View style={styles.productItem}>
+                            <Image
+                                style={styles.img}
+                                source={{ uri: item.linkAnh }} />
+                            <View style={styles.ngang}>
+                                <View style={{ width: 295, marginLeft: 5 }} >
+                                    <View style={styles.ngang}>
+                                        <Text style={{ color: 'white', fontFamily: 'cursive', fontSize: 20, width: 215 }}>{item.tenSP}</Text>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text style={{ color: 'white', fontSize: 15, fontFamily: 'cursive', marginTop: 7 }}>
+                                                {formatPrice(item.giaSP)}
+                                            </Text>
                                         </View>
-
-                                        <ScrollView style={{height:120,width:290}} nestedScrollEnabled={true}>
-                                            <Text style={{ color: 'gray', fontSize: 13 }}>{item.mota}</Text>
-                                        </ScrollView>
                                     </View>
 
+                                    <ScrollView style={{ height: 120, width: 290 }} nestedScrollEnabled={true}>
+                                        <Text style={{ color: 'gray', fontSize: 13 }}>{item.mota}</Text>
+                                    </ScrollView>
+                                </View>
+                                <View>
+
+                                    <TouchableOpacity
+                                        style={{ marginTop: 5 }}
+                                        onPress={() => console.log('Thêm vào giỏ hàng thành công')}>
+                                        <Image
+                                            style={styles.imgadd}
+                                            source={{ uri: 'https://png.pngtree.com/png-vector/20220428/ourmid/pngtree-smooth-glossy-heart-vector-file-ai-and-png-png-image_4557871.png' }} />
+                                    </TouchableOpacity>
                                     <TouchableOpacity
                                         style={styles.buttonadd}
 
@@ -66,16 +71,48 @@ const ManYeuThich = () => {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                        )}
-                    />
+                        </View>
+                    )}
+                />
 
+            </View>
+            <ImageBackground
+                style={{ width: 360, height: 40, borderTopRightRadius: 20, alignItems: 'center', justifyContent: 'center', }}
+                source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }} >
+                <View style={{flexDirection:'row',padding:10}}>
+
+                    <TouchableOpacity
+                        style={{width:80,alignItems:'center',opacity:0.7}}
+                        onPress={() => console.log('')}>
+                        <Image
+                            style={styles.imgadd}
+                            source={{ uri: 'https://i.pinimg.com/originals/0c/02/ce/0c02ce4850d6b88d44f87271ff5f4a71.png' }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{width:80,alignItems:'center',opacity:0.7}}
+                        onPress={() => console.log('')}>
+                        <Image
+                            style={styles.imgadd}
+                            source={{ uri: 'https://cdn-icons-png.flaticon.com/512/60/60992.png' }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{width:80,alignItems:'center',opacity:1}}
+                        onPress={() => console.log('')}>
+                        <Image
+                            style={styles.imgadd}
+                            source={{ uri: 'https://cdn-icons-png.flaticon.com/512/105/105220.png' }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{width:80,alignItems:'center',opacity:0.7}}
+                        onPress={() => console.log('hihi')}>
+                        <Image
+                            style={styles.imgadd}
+                            source={{ uri: 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-bell-512.png' }} />
+                    </TouchableOpacity>
+        
                 </View>
-                <ImageBackground
-                    style={{ width: 360, height: 30, borderTopRightRadius: 20, opacity: 0.3, alignItems: 'center', justifyContent: 'center', marginTop: 10 }}
-                    source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }} >
-                    <Text style={{ fontFamily: 'serif', fontSize: 10, color: 'black' }}>Bản quyền thuộc dungntph35067</Text>
-                </ImageBackground>
             </ImageBackground>
+        </ImageBackground>
     )
 }
 
@@ -85,7 +122,7 @@ const styles = StyleSheet.create({
     container: {
     },
     title: {
-        
+
         fontSize: 20,
         fontFamily: 'serif',
         color: 'black'
