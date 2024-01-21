@@ -1,5 +1,10 @@
 import { Button, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ImageBackground } from 'react-native'
 import React, { useState } from 'react'
+import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import DangKy from './DangKy';
+
+
 
 
 const DangNhap = () => {
@@ -10,6 +15,9 @@ const DangNhap = () => {
     const togglePasswordVisibility = () => {
         setPasswordHidden(!isPasswordHidden);
     };
+    const navigation = useNavigation();
+
+
     return (
         <ImageBackground
             source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }}
@@ -40,12 +48,12 @@ const DangNhap = () => {
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.buttondn}
-                        onPress={() => console.log('Đăng nhập thành công')}>
+                        onPress={() => navigation.navigate('ManHinhChinh')}>
                         <Text style={styles.buttonText}>Đăng nhập</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.buttondk}
-                        onPress={() => console.log('Đăng Ký thành công')}>
+                        onPress={() => navigation.navigate('DangKy')}>
                         <Text style={styles.buttonText}>Đăng Ký</Text>
                     </TouchableOpacity>
                 </View>
@@ -86,6 +94,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         height: 48,
         width: 320,
+        padding:10,
         marginLeft: 20
     },
     checkboxContainer: {

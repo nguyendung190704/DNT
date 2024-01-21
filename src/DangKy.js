@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Button, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 
 const DangKy = () => {
   const [password, setPassword] = useState('');
   const [isPasswordHidden, setPasswordHidden] = useState(true);
 
-  const togglePasswordVisibility = () => {
+  const togglePasswordVisibility = () => {  
     setPasswordHidden(!isPasswordHidden);
   };
+  const navigation = useNavigation();
 
   return (
     <ScrollView contentContainerStyle={styles.background}>
@@ -48,13 +51,13 @@ const DangKy = () => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.buttondn}
-            onPress={() => console.log('Đăng ký thành công')}
+            onPress={() => navigation.navigate('DangNhap')}
           >
             <Text style={styles.buttonText}>Đăng Ký</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttondk}
-            onPress={() => console.log('Trở về thành công')}
+            onPress={() => navigation.navigate('DangNhap')}
           >
             <Text style={styles.buttonText}>Trở về</Text>
           </TouchableOpacity>
