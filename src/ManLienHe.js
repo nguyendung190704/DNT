@@ -88,7 +88,7 @@ const ManLienHe = () => {
                             source={{ uri: 'https://static-00.iconduck.com/assets.00/logout-icon-2048x2048-libuexip.png' }} />
                     </TouchableOpacity>
                     <Modal visible={showModal} transparent={true} onRequestClose={closeModal}>
-                        <View style={{ width: 360, alignItems: 'center', justifyContent: 'center', height: 660 }}>
+                        <View style={{ width: 360, alignItems: 'center', justifyContent: 'center',backgroundColor: 'rgba(0, 0, 0, 0.8)', height: 660 }}>
                             <View style={{ backgroundColor: '#FFCC99', padding: 20 , width:330,height:150,opacity:0.95,borderRadius:20, alignItems: 'center', justifyContent: 'center'}}>
                                 <Text style={{ color: 'black', opacity: 1,fontSize:20, }}>Bạn muốn đăng xuất không ?</Text>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>

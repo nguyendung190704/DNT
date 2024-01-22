@@ -71,7 +71,7 @@ const ManHinhChinh = () => {
 
                                         <TouchableOpacity
                                             style={styles.buttonadd}
-                                            onPress={() => console.log('Thêm vào giỏ hàng thành công')}>
+                                            onPress={() => navigation.navigate('SanPham')}>
                                             <Image
                                                 style={styles.imgadd}
                                                 source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/OOjs_UI_icon_add.svg/1024px-OOjs_UI_icon_add.svg.png' }} />
@@ -116,7 +116,7 @@ const ManHinhChinh = () => {
 
                                         <TouchableOpacity
                                             style={styles.buttonadd}
-                                            onPress={() => console.log('Thêm vào giỏ hàng thành công')}>
+                                            onPress={() => navigation.navigate('SanPham')}>
                                             <Image
                                                 style={styles.imgadd}
                                                 source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/OOjs_UI_icon_add.svg/1024px-OOjs_UI_icon_add.svg.png' }} />
@@ -161,7 +161,7 @@ const ManHinhChinh = () => {
 
                                         <TouchableOpacity
                                             style={styles.buttonadd}
-                                            onPress={() => console.log('Thêm vào giỏ hàng thành công')}>
+                                            onPress={() => navigation.navigate('SanPham')}>
                                             <Image
                                                 style={styles.imgadd}
                                                 source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/OOjs_UI_icon_add.svg/1024px-OOjs_UI_icon_add.svg.png' }} />
@@ -221,8 +221,8 @@ const ManHinhChinh = () => {
                             source={{ uri: 'https://static-00.iconduck.com/assets.00/logout-icon-2048x2048-libuexip.png' }} />
                     </TouchableOpacity>
                     <Modal visible={showModal} transparent={true} onRequestClose={closeModal}>
-                        <View style={{ width: 360, alignItems: 'center', justifyContent: 'center', height: 660 }}>
-                            <View style={{ backgroundColor: '#FFCC99', padding: 20 , width:330,height:150,opacity:0.95,borderRadius:20, alignItems: 'center', justifyContent: 'center'}}>
+                        <View style={{ width: 360, alignItems: 'center', justifyContent: 'center',backgroundColor: 'rgba(0, 0, 0, 0.8)', height: 660 }}>
+                            <View style={{ backgroundColor: '#FFCC99', padding: 20 , width:330,height:150,borderRadius:20, alignItems: 'center', justifyContent: 'center'}}>
                                 <Text style={{ color: 'black', opacity: 1,fontSize:20, }}>Bạn muốn đăng xuất không ?</Text>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
                                     <TouchableOpacity onPress={closeModal}>

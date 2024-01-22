@@ -6,6 +6,7 @@ import ManHinhChinh from './src/ManHinhChinh';
 import ManYeuThich from './src/ManYeuThich';
 import GioHang from './src/GioHang';
 import ManLienHe from './src/ManLienHe';
+import SanPham from './src/SanPham';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -49,6 +50,11 @@ const App = () => {
           name="ManLienHe"
           component={ManLienHe}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SanPham"
+          component={SanPham}
+          options={{ title:'Sản phẩm',headerTitleStyle: { fontSize: 18,  fontWeight: 'bold'},headerStyle:{backgroundColor:'#FFCC00',}}}
         />
       </Stack.Navigator>
     </NavigationContainer>
