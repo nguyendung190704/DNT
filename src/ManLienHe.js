@@ -1,10 +1,14 @@
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput } from 'react-native';
-import React from 'react'
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput ,Modal} from 'react-native';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 
 const ManLienHe = () => {
     const navigation = useNavigation();
+    const [showModal, setShowModal] = useState(false);
+    const closeModal = () => {
+        setShowModal(false);
+    };
 
     return (
         <View>
@@ -48,21 +52,21 @@ const ManLienHe = () => {
                 <View style={{ flexDirection: 'row', padding: 10 }}>
 
                     <TouchableOpacity
-                        style={{ width: 80, alignItems: 'center', opacity: 0.7 }}
+                        style={{ width: 70, alignItems: 'center', opacity: 0.7 }}
                         onPress={() => navigation.navigate('ManHinhChinh')}>
                         <Image
                             style={styles.imgadd}
                             source={{ uri: 'https://i.pinimg.com/originals/0c/02/ce/0c02ce4850d6b88d44f87271ff5f4a71.png' }} />
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={{ width: 80, alignItems: 'center', opacity: 0.7 }}
+                        style={{ width: 70, alignItems: 'center', opacity: 0.7 }}
                         onPress={() => navigation.navigate('GioHang')}>
                         <Image
                             style={styles.imgadd}
                             source={{ uri: 'https://cdn-icons-png.flaticon.com/512/60/60992.png' }} />
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={{ width: 80, alignItems: 'center', opacity: 0.7 }}
+                        style={{ width: 70, alignItems: 'center', opacity: 0.7 }}
                         onPress={() => navigation.navigate('ManYeuThich')}>
                         <Image
                             style={styles.imgadd}
@@ -70,12 +74,35 @@ const ManLienHe = () => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={{ width: 80, alignItems: 'center', opacity: 1 }}
+                        style={{ width: 70, alignItems: 'center', opacity: 1 }}
                         onPress={() => navigation.navigate('ManLienHe')}>
                         <Image
                             style={styles.imgadd}
                             source={{ uri: 'https://cdn.pixabay.com/photo/2016/11/01/03/05/contact-1787332_960_720.png' }} />
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{ width: 70, alignItems: 'center', opacity: 0.7 }}
+                        onPress={() => setShowModal(true)}>
+                        <Image
+                            style={styles.imgadd}
+                            source={{ uri: 'https://static-00.iconduck.com/assets.00/logout-icon-2048x2048-libuexip.png' }} />
+                    </TouchableOpacity>
+                    <Modal visible={showModal} transparent={true} onRequestClose={closeModal}>
+                        <View style={{ width: 360, alignItems: 'center', justifyContent: 'center', height: 660 }}>
+                            <View style={{ backgroundColor: '#FFCC99', padding: 20 , width:330,height:150,opacity:0.95,borderRadius:20, alignItems: 'center', justifyContent: 'center'}}>
+                                <Text style={{ color: 'black', opacity: 1,fontSize:20, }}>Bạn muốn đăng xuất không ?</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
+                                    <TouchableOpacity onPress={closeModal}>
+                                        <Text style={{marginRight:20,color:'black',fontSize:15,}}>KHÔNG</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => navigation.navigate('DangNhap')}>
+                                        <Text style={{marginLeft:20,color:'black',fontSize:15,}}>CÓ</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </Modal>
+
 
                 </View>
             </ImageBackground>

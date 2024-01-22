@@ -3,6 +3,10 @@ import React, { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 import DangKy from './DangKy';
+import { CheckBox } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+
 
 
 
@@ -45,6 +49,16 @@ const DangNhap = () => {
                         <Text>{isPasswordHidden ? 'Hiện ' : 'Ẩn'}</Text>
                     </TouchableOpacity>
                 </View>
+                <View style={styles.checkboxContainer}>
+                <CheckBox
+                    checked={isChecked}
+                    onPress={() => setChecked(!isChecked)}
+                    checkedIcon={<View style={{ width: 18,height: 18,borderWidth: 3, borderColor: 'black',borderRadius:10,Color:'balck'}} />} 
+                    uncheckedIcon={<View style={styles.checkboxIcon} />} 
+                    containerStyle={styles.checkbox}
+                />
+                <Text style={styles.checkboxLabel}>Remember Me</Text>
+            </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.buttondn}
@@ -74,6 +88,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 20
     },
+    checkboxIcon: {
+        width: 18,
+        height: 18,
+        borderWidth: 3,
+        borderRadius:10,
+        borderColor: 'white',  
+    },
     img: {
         width: 255,
         height: 87,
@@ -94,7 +115,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         height: 48,
         width: 320,
-        padding:10,
+        padding: 10,
         marginLeft: 20
     },
     checkboxContainer: {
@@ -104,10 +125,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     checkbox: {
-        alignSelf: 'center',
+        backgroundColor: 'transparent', // Ensure checkbox is not covered by background
+        borderWidth: 0, // Hide checkbox border
+        padding: 0, // Remove any padding
+        marginLeft: 0, // Adjust as needed
     },
     checkboxLabel: {
-        marginLeft: 8,
+        marginLeft: 0,
     },
     buttonContainer: {
         flexDirection: 'row',

@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ImageBackground, ScrollView } from 'react-native';
-import React from 'react'
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ImageBackground, ScrollView ,Modal} from 'react-native';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 
 const ManYeuThich = () => {
     const navigation = useNavigation();
-
+    const [showModal, setShowModal] = useState(false);
+    const closeModal = () => {
+        setShowModal(false);
+    };
     const danhSach = [
         { id: 1, tenSP: 'Cà phê Arabica', giaSP: 500000,danhgia:4.5, loaiSP: 'cfvn',soluong : 5,danhGia : '4.3', linkAnh: 'https://cdn.tgdd.vn/Files/2019/08/17/1188646/tim-hieu-11-loai-ca-phe-pho-bien-nhat-o-viet-nam-hien-nay-202112281009085973.jpg', mota: 'Cà phê Arabica có tên khoa học theo danh pháp hai phần là: Coffea arabica, do loài cà phê này có lá nhỏ, cây có một số đặc điểm hình thái giống như cây chè - một loài cây công nghiệp phổ biến ở Việt Nam. Cà phê chè có hai loại: cà phê moka và cà phê catimor.Đây là loài có giá trị kinh tế nhất trong số các loài cây cà phê. Cà phê chè chiếm 61% các sản phẩm cà phê toàn thế giới. Cà phê arabica còn được gọi là Brazilian Milds nếu nó đến từ Brasil, gọi là Colombian Milds nếu đến từ Colombia, và gọi là Other Milds nếu đến từ các nước khác. Qua đó có thể thấy Brasil và Colombia là hai nước xuất khẩu chính loại cà phê này, chất lượng cà phê của họ cũng được đánh giá cao nhất. Các nước xuất khẩu khác gồm có Ethiopia, México, Guatemala, Honduras, Peru, Ấn Độ.Cây cà phê arabica ưa sống ở vùng núi cao. Người ta thường trồng nó ở độ cao từ 1000-1500 m. Cây có tán nhỏ, màu xanh đậm, lá hình oval. Cây cà phê trưởng thành có thể cao từ 4–6 m, nếu để mọc hoang dã có thể cao đến 10 m. Quả hình bầu dục, mỗi quả chứa hai hạt cà phê.Cà phê chè sau khi trồng khoảng 3 đến 4 năm thì có thể bắt đầu cho thu hoạch. Thường thì cà phê 25 tuổi đã được coi là già, không thu hoạch được nữa. Thực tế nó vẫn có thể tiếp tục sống thêm khoảng 70 năm. Cây cà phê arabica ưa thích nhiệt độ từ 16-25°C, lượng mưa khoảng trên 1000 mm.Trên thị trường cà phê chè được đánh giá cao hơn cà phê vối (coffea canephora hay coffea robusta) vì có hương vị thơm ngon và chứa ít hàm lượng caffein hơn. Một bao cà phê chè (60 kg) thường có giá cao gấp 2 lần một bao cà phê vối.Việt Nam là nước xuất khẩu cà phê lớn thứ hai thế giới nhưng chủ yếu là cà phê vối. Năm 2005 dự kiến diện tích trồng cà phê chè mới đạt khoảng 10% tổng diện tích trồng cà phê cả nước (khoảng 40.000 ha/410.000 ha). Hiện cà phê chè được trồng ở các tỉnh Lâm Đồng ở Tây Nguyên, vùng thành phố Sơn La, huyện Mai Sơn, huyện Thuận Châu (Sơn La) và Mường Ảng (Điện Biên) ở Tây Bắc.' },
         { id: 2, tenSP: 'Cà phê Robusta', giaSP: 450000, loaiSP: 'cfvn',soluong : 2,danhGia : '4.5', linkAnh: 'https://cdn.tgdd.vn/Files/2019/08/17/1188646/tim-hieu-11-loai-ca-phe-pho-bien-nhat-o-viet-nam-hien-nay-202008121539225779.jpg', mota: 'Cà phê Robusta là cây quan trọng thứ hai trong các loài cà phê. Khoảng 39% các sản phẩm cà phê được sản xuất từ loại cà phê này. Nước xuất khẩu cà phê vối lớn nhất thế giới là Việt Nam.[1] Các nước xuất khẩu quan trọng khác gồm Brasil, Indonesia, Ấn Độ, Malaysia, Uganda, Côte d Ivoire. Ở Brasil cà phê vối được gọi với tên là Conilon[2][3]. Đặc điểm Cây cà phê vối có dạng cây gỗ hoặc cây bụi, chiều cao của cây trưởng thành có thể lên tới 10 m. Quả cà phê có hình tròn, hạt nhỏ hơn hạt cà phê chè (tức cà phê arabica). Hàm lượng caffein trong hạt cà phê vối khoảng 2-4%, trong khi ở cà phê chè chỉ khoảng 1-2%.Giống như cà phê chè, cây cà phê vối 3-4 tuổi có thể bắt đầu thu hoạch. Cây cho hạt trong khoảng từ 20 đến 30 năm. Cà phê vối ưa sống ở vùng nhiệt đới, độ cao thích hợp để trồng cây là dưới 1000 m. Nhiệt độ ưa thích của cây khoảng 24-29°C, lượng mưa khoảng trên 1.000 mm. Cây cà phê vối cần nhiều ánh sáng mặt trời hơn so với cây cà phê chè.Nguồn gốc, phân bố bản địaCó nguồn gốc từ các khu rừng cao nguyên ở Ethiopia, C. canephora mọc hoang dã tại Tây và Trung châu Phi, từ Liberia tới Tanzania và về phía nam tới Angola. Nó không được công nhận như một loài của chi Coffea cho tới tận năm 1897[4], hơn 100 năm sau loài Coffea arabica[5][6]. Nó cũng được tự nhiên hóa tại Borneo, Polynesia thuộc Pháp, Costa Rica, Nicaragua, Jamaica và Tiểu Antilles[7].Trồng và xuất khẩu tại Việt Nam Cà phê vối chứa hàm lượng caffein cao hơn và có hương vị không tinh khiết bằng cà phê chè, do vậy mà được đánh giá thấp hơn. Giá một bao cà phê vối thường chỉ bằng một nửa so với cà phê chè. Niên vụ 2012- 2013 Việt Nam xuất khẩu khoảng 1,426 triệu tấn (~ 23,77 triệu bao, loại 60 kg/bao) cà phê loại này[8], chiếm gần một nửa lượng cà phê vối xuất khẩu của toàn thế giới (trên 60 triệu bao). Hiện nay gần 90% diện tích cà phê ở Việt Nam được trồng cà phê vối, 10% trồng cà phê chè, khoảng 1% còn lại được trồng cà phê mít (Coffea excelsa).' },
@@ -87,21 +90,21 @@ const ManYeuThich = () => {
                 <View style={{ flexDirection: 'row', padding: 10 }}>
 
                     <TouchableOpacity
-                        style={{ width: 80, alignItems: 'center', opacity: 0.7 }}
+                        style={{ width: 70, alignItems: 'center', opacity: 0.7 }}
                         onPress={() => navigation.navigate('ManHinhChinh')}>
                         <Image
                             style={styles.imgadd}
                             source={{ uri: 'https://i.pinimg.com/originals/0c/02/ce/0c02ce4850d6b88d44f87271ff5f4a71.png' }} />
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={{ width: 80, alignItems: 'center', opacity: 0.7 }}
+                        style={{ width: 70, alignItems: 'center', opacity: 0.7 }}
                         onPress={() => navigation.navigate('GioHang')}>
                         <Image
                             style={styles.imgadd}
                             source={{ uri: 'https://cdn-icons-png.flaticon.com/512/60/60992.png' }} />
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={{ width: 80, alignItems: 'center', opacity: 1 }}
+                        style={{ width: 70, alignItems: 'center', opacity: 1 }}
                         onPress={() => navigation.navigate('ManYeuThich')}>
                         <Image
                             style={styles.imgadd}
@@ -109,12 +112,35 @@ const ManYeuThich = () => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={{ width: 80, alignItems: 'center', opacity: 0.7 }}
+                        style={{ width: 70, alignItems: 'center', opacity: 0.7 }}
                         onPress={() => navigation.navigate('ManLienHe')}>
                         <Image
                             style={styles.imgadd}
                             source={{ uri: 'https://cdn.pixabay.com/photo/2016/11/01/03/05/contact-1787332_960_720.png' }} />
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{ width: 70, alignItems: 'center', opacity: 0.7 }}
+                        onPress={() => setShowModal(true)}>
+                        <Image
+                            style={styles.imgadd}
+                            source={{ uri: 'https://static-00.iconduck.com/assets.00/logout-icon-2048x2048-libuexip.png' }} />
+                    </TouchableOpacity>
+                    <Modal visible={showModal} transparent={true} onRequestClose={closeModal}>
+                        <View style={{ width: 360, alignItems: 'center', justifyContent: 'center', height: 660 }}>
+                            <View style={{ backgroundColor: '#FFCC99', padding: 20 , width:330,height:150,opacity:0.95,borderRadius:20, alignItems: 'center', justifyContent: 'center'}}>
+                                <Text style={{ color: 'black', opacity: 1,fontSize:20, }}>Bạn muốn đăng xuất không ?</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
+                                    <TouchableOpacity onPress={closeModal}>
+                                        <Text style={{marginRight:20,color:'black',fontSize:15,}}>KHÔNG</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={() => navigation.navigate('DangNhap')}>
+                                        <Text style={{marginLeft:20,color:'black',fontSize:15,}}>CÓ</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </Modal>
+
 
                 </View>
             </ImageBackground>
