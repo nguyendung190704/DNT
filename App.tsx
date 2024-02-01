@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground } from 'react-native'
 import React from 'react'
 import DangNhap from './src/DangNhap';
 import DangKy from './src/DangKy';
@@ -7,6 +7,10 @@ import ManYeuThich from './src/ManYeuThich';
 import GioHang from './src/GioHang';
 import ManLienHe from './src/ManLienHe';
 import SanPham from './src/SanPham';
+import ManChao from './src/ManChao';
+import ThemSanPham from './src/ThemSanPham';
+import GioiThieu from './src/GioiThieu';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -16,11 +20,16 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="DangNhap"
+        initialRouteName="ManChao"
         screenOptions={{
           gestureEnabled: false
         }}
       >
+        <Stack.Screen
+          name="ManChao"
+          component={ManChao}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="DangNhap"
           component={DangNhap}
@@ -54,7 +63,26 @@ const App = () => {
         <Stack.Screen
           name="SanPham"
           component={SanPham}
-          options={{ title:'Sản phẩm',headerTitleStyle: { fontSize: 18,  fontWeight: 'bold'},headerStyle:{backgroundColor:'#FFCC00',}}}
+          options={{
+            title: 'Sản phẩm', headerTitleStyle: { fontSize: 18, fontWeight: 'bold' }, headerBackground: () => (
+              <ImageBackground
+                style={{ flex: 1 }}
+                source={{
+                  uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg'
+                }}
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="ThemSanPham"
+          component={ThemSanPham}
+          options={{ title:'Thêm sản phẩm'}}
+        />
+        <Stack.Screen
+          name="GioiThieu"
+          component={GioiThieu}
+          options={{title:'Giới thiệu' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

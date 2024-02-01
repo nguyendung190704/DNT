@@ -1,11 +1,15 @@
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ImageBackground, ScrollView, Modal } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TextInput } from 'react-native';
+import axios from 'axios';
+
 
 const SanPham = () => {
   const navigation = useNavigation();
   const [showModal, setShowModal] = useState(false);
+  const [danhSach, setDanhSach] = useState([]);
+
   const closeModal = () => {
     setShowModal(false);
   };
@@ -23,6 +27,20 @@ const SanPham = () => {
       setQuantity(quantity - 1);
     }
   };
+  const fetchData = async () => {
+    try {
+      const response = await axios.get('http://192.168.1.3:3000/danhSach');
+      setDanhSach(response.data);
+    } catch (error) {
+      console.error('Error fetching user data:', error.message);
+      console.error('Error details:', error);
+    }
+  };
+
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <ImageBackground
@@ -41,20 +59,20 @@ const SanPham = () => {
                   style={{ width: 20, height: 17, }}
                   source={{ uri: 'https://cdn.pixabay.com/photo/2013/07/12/18/03/black-152877_960_720.png' }} />
               </TouchableOpacity>
-              <View style={{ flexDirection: 'column', backgroundColor: 'rgba(0, 0, 0, 0.5)', marginTop: 196,borderTopRightRadius:1 }}>
+              <View style={{ flexDirection: 'column', backgroundColor: 'rgba(0, 0, 0, 0.5)', marginTop: 196, borderTopRightRadius: 1 }}>
                 <View style={{ flexDirection: 'row' }}>
                   <Text style={{ color: 'white', fontFamily: 'cursive', fontSize: 30, width: 240, marginLeft: 5 }}>Cà phê Arabica</Text>
-                  <Text style={{ color: 'white', fontSize: 20, fontFamily: 'cursive', marginTop: 5 }}>
+                  <Text style={{ color: 'white', fontSize: 20, fontFamily: 'cursive', marginTop: 5,fontWeight:'900' }}>
                     {formatPrice(500000)}
                   </Text>
                 </View>
-                <Text style={{ color: 'white', fontFamily: 'cursive', fontSize: 20, marginTop: 2, marginBottom: 5, marginLeft: 10 }}>4.5 ⭐ </Text>
+                <Text style={{ color: 'white', fontFamily: 'cursive', fontSize: 20, marginTop: 2, marginBottom: 5, marginLeft: 10,fontWeight:'900' }}>4.5 ⭐ </Text>
 
               </View>
             </ImageBackground>
             <View style={{}}>
               <View style={{ width: 360, marginLeft: 5 }} >
-                <Text style={{ color: 'white', fontSize: 15, marginTop: 2 }}>Mô tả sản phẩm : </Text>
+                <Text style={{ color: 'white', fontSize: 15, marginTop: 2,fontWeight:'900' }}>Mô tả sản phẩm : </Text>
                 <ScrollView style={{ height: 120, width: 355 }} nestedScrollEnabled={true}>
                   <Text style={{ color: 'gray', fontSize: 13 }}>Cà phê Arabica có tên khoa học theo danh pháp hai phần là: Coffea arabica, do loài cà phê này có lá nhỏ, cây có một số đặc điểm hình thái giống như cây chè - một loài cây công nghiệp phổ biến ở Việt Nam. Cà phê chè có hai loại: cà phê moka và cà phê catimor.Đây là loài có giá trị kinh tế nhất trong số các loài cây cà phê.
                     Cà phê chè chiếm 61% các sản phẩm cà phê toàn thế giới. Cà phê arabica còn được gọi là Brazilian Milds nếu nó đến từ Brasil, gọi là Colombian Milds nếu đến từ Colombia, và gọi là Other Milds nếu đến từ các nước khác. Qua đó có thể thấy Brasil và Colombia là hai nước xuất khẩu chính loại cà phê này, chất lượng cà phê của họ cũng được đánh giá cao nhất. Các nước xuất
@@ -63,9 +81,9 @@ const SanPham = () => {
                     Cây cà phê arabica ưa thích nhiệt độ từ 16-25°C, lượng mưa khoảng trên 1000 mm.Trên thị trường cà phê chè được đánh giá cao hơn cà phê vối (coffea canephora hay coffea robusta) vì có hương vị thơm ngon và chứa ít hàm lượng caffein hơn. Một bao cà phê chè (60 kg) thường có giá cao gấp 2 lần một bao cà phê vối.Việt Nam là nước xuất khẩu cà phê lớn thứ hai thế giới nhưng chủ yếu là cà phê vối. Năm 2005 dự kiến diện tích trồng cà phê chè mới đạt khoảng 10% tổng
                     diện tích trồng cà phê cả nước (khoảng 40.000 ha/410.000 ha). Hiện cà phê chè được trồng ở các tỉnh Lâm Đồng ở Tây Nguyên, vùng thành phố Sơn La, huyện Mai Sơn, huyện Thuận Châu (Sơn La) và Mường Ảng (Điện Biên) ở Tây Bắc.</Text>
                 </ScrollView>
-                <View style={{flexDirection:'row'}}>
-                <Text style={{ color: 'white', fontSize: 15, marginTop: 8 ,width:170}}>Số lượng : </Text>
-                <Text style={{ color: 'white', fontSize: 17, marginTop: 7 }}>Tổng tiền : {formatPrice(5000000*quantity)} </Text>
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ color: 'white', fontSize: 15, marginTop: 8, width: 160 }}>Số lượng : </Text>
+                  <Text style={{ color: 'red',fontWeight:'500', fontSize: 17, marginTop: 7 }}>Tổng tiền : {formatPrice(5000000 * quantity)} </Text>
                 </View>
                 <View style={{ flexDirection: 'row', }}>
                   <View style={styles.quantityContainer}>
@@ -185,7 +203,7 @@ const styles = StyleSheet.create({
     height: 520,
     borderBottomWidth: 1,
     borderTopLeftRadius: 10,
-    borderTopRightRadius:10,
+    borderTopRightRadius: 10,
     backgroundColor: '#222222',
     borderBottomColor: 'black',
   },

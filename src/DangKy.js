@@ -1,64 +1,87 @@
-import React, { useState } from 'react';
-import { Button, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, ImageBackground } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, TextInput, View, TouchableOpacity, ScrollView, ImageBackground, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NavigationContainer } from '@react-navigation/native';
+import axios from 'axios';
 
 const DangKy = () => {
-  const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState({fullname: '',email: '',username: '',password: '',phone: '',address: '',
+  });
   const [isPasswordHidden, setPasswordHidden] = useState(true);
 
-  const togglePasswordVisibility = () => {  
+  const togglePasswordVisibility = () => {
     setPasswordHidden(!isPasswordHidden);
   };
+
   const navigation = useNavigation();
+
+  const handleRegistration = async () => {
+    try {
+      const response = await axios.post('https://65bb276752189914b5bb52a6.mockapi.io/nguoiDung', userData);
+      console.log('User registration successful:', response.data);
+      navigation.navigate('DangNhap');
+    } catch (error) {
+      console.error('Error registering user:', error.message);
+      console.error('Error details:', error);
+    }
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.background}>
       <ImageBackground
-        source={{ uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg' }}
+        source={{
+          uri: 'https://image.slidesdocs.com/responsive-images/background/coffee-culture-illustration-powerpoint-background_e224109f77__960_540.jpg',
+        }}
       >
         <View style={styles.logo}>
           <Image
             style={styles.img}
-            source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/FPT_Polytechnic.png/1200px-FPT_Polytechnic.png' }}
+            source={{
+              uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/FPT_Polytechnic.png/1200px-FPT_Polytechnic.png',
+            }}
           />
           <Text style={styles.cm}>Chào mừng bạn đã đến </Text>
         </View>
         <Text style={styles.pw}>Fullname</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setUserData({ ...userData, fullname: text })}
+        />
         <Text style={styles.pw}>Email</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setUserData({ ...userData, email: text })}
+        />
         <Text style={styles.pw}>Username</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setUserData({ ...userData, username: text })}
+        />
         <Text style={styles.pw}>Password</Text>
         <View style={styles.passwordContainer}>
           <TextInput
             style={styles.passwordInput}
             secureTextEntry={isPasswordHidden}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => setUserData({ ...userData, password: text })}
           />
-          <TouchableOpacity
-            style={styles.eyeIcon}
-            onPress={togglePasswordVisibility}
-          >
+          <TouchableOpacity style={styles.eyeIcon} onPress={togglePasswordVisibility}>
             <Text>{isPasswordHidden ? 'Hiện ' : 'Ẩn'}</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.pw}>Phone</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setUserData({ ...userData, phone: text })}
+        />
         <Text style={styles.pw}>Address</Text>
-        <TextInput style={styles.textInput} />
+        <TextInput
+          style={styles.textInput}
+          onChangeText={(text) => setUserData({ ...userData, address: text })}
+        />
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.buttondn}
-            onPress={() => navigation.navigate('DangNhap')}
-          >
+          <TouchableOpacity style={styles.buttondn} onPress={handleRegistration}>
             <Text style={styles.buttonText}>Đăng Ký</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttondk}
-            onPress={() => navigation.navigate('DangNhap')}
-          >
+          <TouchableOpacity style={styles.buttondk} onPress={() => navigation.navigate('DangNhap')}>
             <Text style={styles.buttonText}>Trở về</Text>
           </TouchableOpacity>
         </View>
@@ -74,7 +97,7 @@ const styles = StyleSheet.create({
   logo: {
     alignItems: 'center',
     marginTop: 20,
-    marginBottom:10,
+    marginBottom: 10,
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -85,14 +108,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     height: 48,
-},
-passwordInput: {
+  },
+  passwordInput: {
     flex: 1,
     padding: 10,
-},
-eyeIcon: {
+  },
+  eyeIcon: {
     padding: 10,
-},
+  },
   img: {
     width: 255,
     height: 87,
@@ -122,7 +145,7 @@ eyeIcon: {
     marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
-    paddingBottom:20
+    paddingBottom: 20
   },
   buttondn: {
     width: 130,

@@ -1,13 +1,45 @@
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput ,Modal} from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, ImageBackground, ScrollView, TextInput, Modal } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+
+
 
 
 const ManLienHe = () => {
+    const [lienHe, setlienHe] = useState([]);
+    const [feedbackText, setFeedbackText] = useState('');
+
     const navigation = useNavigation();
     const [showModal, setShowModal] = useState(false);
     const closeModal = () => {
         setShowModal(false);
+    };
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('https://65bb276752189914b5bb52a6.mockapi.io/lienHe');
+            setlienHe(response.data);
+        } catch (error) {
+            console.error('Error fetching user data:', error.message);
+            console.error('Error details:', error);
+        }
+    };
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const handleSendFeedback = async () => {
+        try {
+            const response = await axios.post('https://65bb276752189914b5bb52a6.mockapi.io/lienHe', {
+                noiDung: feedbackText,
+            });
+            setlienHe(response.data);
+            setFeedbackText('');
+            console.log('Nội dung phản hồi :', response.data);
+        } catch (error) {
+            console.error('Error sending feedback:', error.message);
+            console.error('Error details:', error);
+        }
     };
 
     return (
@@ -31,10 +63,17 @@ const ManLienHe = () => {
                             <Text style={{ marginLeft: 35, fontSize: 13, marginTop: 5 }}>+ Phone : 036 666 1241</Text>
                             <Text style={{ marginLeft: 35, fontSize: 13, marginTop: 5 }}>+ Hotline : 1900 1004</Text>
                             <Text style={{ marginTop: 20, fontSize: 15, marginLeft: 5 }}>Hoặc bạn có thể phản hồi ở đây:</Text>
-                            <TextInput style={{ borderWidth: 1, borderRadius: 10, margin: 10, height: 200, width: 340, textAlignVertical: 'top' }} multiline={true} numberOfLines={16} placeholder='Nhập nội dung phản hồi'></TextInput>
+                            <TextInput
+                                style={{ borderWidth: 1, borderRadius: 10, margin: 10, height: 200, width: 340, textAlignVertical: 'top' }}
+                                multiline={true}
+                                numberOfLines={16}
+                                placeholder='Nhập nội dung phản hồi'
+                                value={feedbackText}
+                                onChangeText={(text) => setFeedbackText(text)}
+                            />
                             <TouchableOpacity
                                 style={styles.buttondk}
-                                onPress={() => console.log('gui thành công')}>
+                                onPress={handleSendFeedback}>
                                 <Text style={styles.buttonText}>Gửi</Text>
                             </TouchableOpacity>
                         </View>
@@ -88,15 +127,15 @@ const ManLienHe = () => {
                             source={{ uri: 'https://static-00.iconduck.com/assets.00/logout-icon-2048x2048-libuexip.png' }} />
                     </TouchableOpacity>
                     <Modal visible={showModal} transparent={true} onRequestClose={closeModal}>
-                        <View style={{ width: 360, alignItems: 'center', justifyContent: 'center',backgroundColor: 'rgba(0, 0, 0, 0.8)', height: 660 }}>
-                            <View style={{ backgroundColor: '#FFCC99', padding: 20 , width:330,height:150,opacity:0.95,borderRadius:20, alignItems: 'center', justifyContent: 'center'}}>
-                                <Text style={{ color: 'black', opacity: 1,fontSize:20, }}>Bạn muốn đăng xuất không ?</Text>
+                        <View style={{ width: 360, alignItems: 'center', justifyContent: 'center', backgroundColor: 'rgba(0, 0, 0, 0.8)', height: 660 }}>
+                            <View style={{ backgroundColor: '#FFCC99', padding: 20, width: 330, height: 150, opacity: 0.95, borderRadius: 20, alignItems: 'center', justifyContent: 'center' }}>
+                                <Text style={{ color: 'black', opacity: 1, fontSize: 20, }}>Bạn muốn đăng xuất không ?</Text>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 20 }}>
                                     <TouchableOpacity onPress={closeModal}>
-                                        <Text style={{marginRight:20,color:'black',fontSize:15,}}>KHÔNG</Text>
+                                        <Text style={{ marginRight: 20, color: 'black', fontSize: 15, }}>KHÔNG</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity onPress={() => navigation.navigate('DangNhap')}>
-                                        <Text style={{marginLeft:20,color:'black',fontSize:15,}}>CÓ</Text>
+                                        <Text style={{ marginLeft: 20, color: 'black', fontSize: 15, }}>CÓ</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
