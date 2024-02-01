@@ -17,7 +17,7 @@ const DangKy = () => {
   const handleRegistration = async () => {
     try {
       const response = await axios.post('https://65bb276752189914b5bb52a6.mockapi.io/nguoiDung', userData);
-      console.log('User registration successful:', response.data);
+      console.log('Tài khoản mới là :', response.data);
       navigation.navigate('DangNhap');
     } catch (error) {
       console.error('Error registering user:', error.message);

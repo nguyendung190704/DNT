@@ -58,7 +58,7 @@ const ManHinhChinh = () => {
                         </ImageBackground>
                         <FlatList
                             data={danhSach}
-                            keyExtractor={(item) => item.idsp}
+                            keyExtractor={(item) => item.id}
                             horizontal={true}
                             renderItem={({ item }) => (
                                 <View style={styles.productItem}>
@@ -103,7 +103,7 @@ const ManHinhChinh = () => {
 
                         <FlatList
                             data={danhSach.filter(item => item.loaiSP === 'cfvn')}
-                            keyExtractor={(item) => item.idsp}
+                            keyExtractor={(item) => item.id}
                             horizontal={true}
                             renderItem={({ item }) => (
                                 <View style={styles.productItem}>
@@ -148,7 +148,7 @@ const ManHinhChinh = () => {
 
                         <FlatList
                             data={danhSach.filter(item => item.loaiSP === 'cfnn')}
-                            keyExtractor={(item) => item.idsp}
+                            keyExtractor={(item) => item.id}
                             horizontal={true}
                             renderItem={({ item }) => (
                                 <View style={styles.productItem}>
